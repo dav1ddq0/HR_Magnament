@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using HR_API.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -5,7 +7,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "HR_API.xml"));
+});
+
+builder.Services.AddDbContext<HRAPIDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("HRApiConnectionString")));
+
 
 var app = builder.Build();
 
