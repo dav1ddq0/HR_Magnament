@@ -19,6 +19,9 @@ namespace HR_API.Controllers
             this.dbContext = dbContext;
         }
 
+        /// <summary>
+        /// Get a list of all the user roles.
+        /// </summary>
         [HttpGet]
         public async Task<IActionResult> GetAllRoles()
         {
@@ -49,7 +52,9 @@ namespace HR_API.Controllers
                     .ToList()
             );
         }
-
+        /// <summary>
+        /// Get specific role by ID
+        /// </summary>
         [HttpGet]
         [Route("{id:guid}")]
         public async Task<IActionResult> GetRoleById([FromRoute] Guid id)
@@ -87,6 +92,9 @@ namespace HR_API.Controllers
             return Ok(role);
         }
 
+        /// <summary>
+        /// Add New Role
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> AddRole([FromBody] AddRoleRequest request)
         {
@@ -113,6 +121,9 @@ namespace HR_API.Controllers
             }
         }
 
+        /// <summary>
+        /// Delete role by ID
+        /// </summary>
         [HttpDelete]
         [Route("{id:guid}")]
         public async Task<IActionResult> DeleteById([FromRoute] Guid id)
